@@ -101,7 +101,7 @@ Mô tả: Trả về sản phẩm có giá cao nhất theo brand được chỉ 
         }
 
         if (maxPrice == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
 
         return ResponseEntity.ok(maxPrice);
