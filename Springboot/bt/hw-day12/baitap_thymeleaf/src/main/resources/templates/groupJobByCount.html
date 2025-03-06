@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Danh sách nghề nghiệp và số người làm nghề</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<h1> Danh sách nghề nghiệp và số người làm nghề </h1>
+<ul>
+    <li th:each="entry : ${jobCount}">
+        <span th:text="${entry.key}"></span>: <strong th:text="${entry.value}"></strong> người
+    </li>
+</ul>
+<a th:href="@{/}">Back to Menu Option</a>
+<script th:src="@{/js/main.js}"></script>
+
+</body>
+</html>

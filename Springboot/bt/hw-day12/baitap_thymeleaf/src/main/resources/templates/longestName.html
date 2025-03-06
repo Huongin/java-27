@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Người có tên dài nhất</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<h1> Người có tên dài nhất</h1>
+<ul>
+  <li th:if="${longestNamePerson != null}">
+    <span th:text="${longestNamePerson.fullname}"></span> -  Độ dài tên:
+    <span th:text="${#strings.length(longestNamePerson.fullname)}"></span>  ký tự.
+  </li>
+  <li th:unless="${longestNamePerson != null}">Không có dữ liệu</li>
+</ul>
+
+<a th:href="@{/}">Back to Menu Option</a>
+
+<script th:src="@{/js/main.js}"></script>
+
+</body>
+</html>

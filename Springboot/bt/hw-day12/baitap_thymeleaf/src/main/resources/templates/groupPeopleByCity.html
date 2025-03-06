@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Danh sách người theo tên thành phố</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<h1> Danh sách người theo tên thành phố</h1>
+
+<div th:each="entry : ${peopleByCity}">
+    <h3 th:text="${entry.key}"></h3>
+    <ul>
+        <li th:each="person : ${entry.value}" th:text="${person.fullname}"></li>
+    </ul>
+</div>
+<a th:href="@{/}">Back to Menu Option</a>
+<script th:src="@{/js/main.js}"></script>
+
+</body>
+</html>

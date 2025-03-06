@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Person Management</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<h1>Menu Option</h1>
+
+<ul>
+    <li><a href="/groupPeopleByCity">Danh sách người theo thành phố</a></li>
+    <li><a href="/groupJobByCount">Số lượng người theo nghề nghiệp</a></li>
+    <li><a href="/aboveAverageSalary">Người có lương cao hơn trung bình</a></li>
+    <li><a href="/longestName">Người có tên dài nhất</a></li>
+</ul>
+
+
+<script th:src="@{/js/main.js}"></script>
+</body>
+</html>
