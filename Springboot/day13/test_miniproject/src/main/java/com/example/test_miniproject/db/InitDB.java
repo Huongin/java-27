@@ -3,7 +3,6 @@ package com.example.test_miniproject.db;
 import com.example.test_miniproject.model.Product;
 import com.example.test_miniproject.utils.IFileReader;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 
