@@ -18,5 +18,4 @@ public class Product {
     private int price;
     private double rating;
     private int priceDiscount;
-
 }
