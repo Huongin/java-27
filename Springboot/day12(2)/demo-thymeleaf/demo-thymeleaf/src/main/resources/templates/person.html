@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Chi tiết person</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+
+<h2 th:if="${person == null}">Person not found!!!</h2>
+
+<div th:if="${person != null}">
+    <h2>Chi tiết person</h2>
+    <p th:text="${person.name}"></p>
+    <p th:text="${person.id}"></p>
+    <p th:text="${person.gender.equals('M') ? 'Nam' : 'Nữ'}"></p>
+    <p th:if="${person.age >= 18}" >Trên 18 tuổi</p>
+    <p th:if="${person.age < 18}">Dưới 18 tuổi</p>
+
+    <!-- Danh sách Person liên quan -->
+    <h3>Người liên quan</h3>
+    <ul th:if="${relatedPeople != null and not #lists.isEmpty(relatedPeople)}">
+        <li th:each="p : ${relatedPeople}">
+            <a th:href="@{/person/{id}(id=${p.id})}">
+                <span th:text="${p.name}"></span> - ID: <span th:text="${p.id}"></span>
+            </a>
+        </li>
+    </ul>
+    <p th:if="${relatedPeople == null or #lists.isEmpty(relatedPeople)}">Không có người liên quan.</p>
+</div>
+
+<script th:src="@{/js/main.js}"></script>
+
+</body>
+</html>
