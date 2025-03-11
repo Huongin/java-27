@@ -2,15 +2,13 @@ body {
     background-color: #00b5e2;  /* Nền toàn trang màu xanh dương */
 }
 
-.product-image {
+.card-img-top {
     max-height: 400px;
     object-fit: cover;
     border-radius: 8px;
 }
 
-.product-card h2, .product-card p {
-    margin-bottom: 10px;
-}
+
 
 .btn-secondary {
     background-color: #f8b3d1;

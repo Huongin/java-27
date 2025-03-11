@@ -17,9 +17,9 @@
         <div class="col-md-6">
             <h2 th:text="${product.name}">Product Name</h2>
             <p th:text="${product.description}">Description</p>
-            <p><strong>Price:</strong> <span th:text="${product.price}"></span> VND</p>
-            <p><strong>Discount:</strong> <span th:text="${product.priceDiscount}"></span> VNĐ</p>
-            <p><strong>Rating:</strong> <span th:text="${product.rating}"></span>/5</p>
+            <p><strong class="Price">Price:</strong> <span th:text="${product.price}"></span> VND</p>
+            <p><strong class="Discount">Discount:</strong> <span th:text="${product.priceDiscount}"></span> VNĐ</p>
+            <p><strong class="Rating">Rating:</strong> <span th:text="${product.rating}"></span>/5</p>
             <a href="/" class="btn btn-secondary">Return list</a>
         </div>
     </div>

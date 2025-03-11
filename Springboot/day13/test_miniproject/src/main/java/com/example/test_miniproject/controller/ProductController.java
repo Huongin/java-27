@@ -42,7 +42,7 @@ public class ProductController {
 
         //Lọc sp theo keyword
         List<Product> productFound = new ArrayList<>();
-        assert keyword != null;
+
         if(keyword != null){
             productFound = products.stream()
                     .filter((p -> p.getName().toLowerCase().contains(keyword.toLowerCase())))
