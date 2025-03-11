@@ -8,9 +8,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
 
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -23,7 +24,9 @@ public class ProductController {
     }
     //Lấy danh sách products
     @GetMapping("/") //http://localhost:8080
-    public String getAllProduct(Model model, @RequestParam(required = false, defaultValue = "1") int page) {
+    public String getAllProduct(Model model,
+                                @RequestParam(required = false) String keyword,
+                                @RequestParam(required = false, defaultValue = "1") int page) {
         List<Product> products = productService.getAllProducts(); // lấy danh sách sản phầm
 
         // Tính giá giảm cho mỗi sản phẩm rating dưới 3
@@ -36,7 +39,30 @@ public class ProductController {
                 product.setPriceDiscount(0);
             }
         }
-        model.addAttribute("products", products);
+
+        //Lọc sp theo keyword
+        List<Product> productFound = new ArrayList<>();
+        assert keyword != null;
+        if(keyword != null){
+            productFound = products.stream()
+                    .filter((p -> p.getName().toLowerCase().contains(keyword.toLowerCase())))
+                    .toList();
+        }else {
+            productFound = products;
+        }
+        //Phân trang
+        PageResponse<Product> pageResponse = new PageResponse<>(productFound,6,page);
+
+        // Debug kiểm tra dữ liệu
+        System.out.println("Total products found: " + productFound.size());
+        System.out.println("Total pages: " + pageResponse.getTotalPages());
+        System.out.println("Current page: " + page);
+        System.out.println("Page Data Size: " + pageResponse.getData().size());
+
+        //Đẩy dữ liệu ra view
+        model.addAttribute("pageResponse", pageResponse);
+        model.addAttribute("products", productFound);
+
         return "product-list"; // Tên template Thymeleaf
     }
 

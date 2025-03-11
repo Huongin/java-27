@@ -11,7 +11,8 @@
     <h1 class="text-center mb-4">Product Detail</h1>
     <div class="row">
         <div class="col-md-6">
-            <img th:src="${product.thumbnail}" class="img-fluid product-image" alt="Hình ảnh sản phẩm">
+            <img th:src="'https://picsum.photos/seed/' + ${product.id} + '/320/240'" class="card-img-top" alt="Product image">
+
         </div>
         <div class="col-md-6">
             <h2 th:text="${product.name}">Product Name</h2>

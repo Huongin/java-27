@@ -18,14 +18,18 @@ public class PageResponse <T>{
         this.currentPage = currentPage;
     }
 
+    public int getCurrentPage() {
+        return currentPage;
+    }
 
     public int getTotalPages() {
         return (int)Math.ceil((double) resources.size()/pageSize);
     }
 
-    public List<T> getResources() {
+    public List<T> getData() {
         int startIndex = (currentPage - 1) * pageSize;
         int endIndex = Math.min(startIndex + pageSize, resources.size());
         return resources.subList(startIndex, endIndex);
     }
+
 }
