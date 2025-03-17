@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="./plugins/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/style.css">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg bg-dark">
+            <div class="container">
+                <a class="navbar-brand" href="#">
+                    <img src="https://movie.techmaster.vn/assets/logo-C2IIl7EL.png" alt="logo">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-between" id="navbarNavAltMarkup">
+                    <div class="navbar-nav">
+                        <a class="nav-link text-white" href="#">Trang chủ</a>
+                        <a class="nav-link text-white" href="#">Phim bộ</a>
+                        <a class="nav-link text-white" href="#">Phim chiếu rạp</a>
+                        <a class="nav-link text-white" href="#">Phim lẻ</a>
+                        <a class="nav-link text-white" href="#">Quốc gia</a>
+                        <a class="nav-link text-white" href="#">Thể loại</a>
+                        <a class="nav-link text-white" href="#">Mua phim</a>
+                    </div>
+                    <div>
+                        <a class="nav-link text-white" href="#">Đăng nhập</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <section class="py-4">
+        <div class="container">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Trang chủ</a></li>
+                    <li class="breadcrumb-item"><a href="#">Phim bộ</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Đầu gấu đụng đầu đất</li>
+                </ol>
+            </nav>
+
+            <div class="row">
+                <div class="col-4">
+                    <div class="detail-movie-poster rounded overflow-hidden">
+                        <img src="https://cinema.momocdn.net/img/1f118f3d-2381-4707-afef-cdb2efb8d933-4260000369219083.png"
+                            alt="Trạng Tí Phiêu Lưu Ký">
+                    </div>
+                </div>
+                <div class="col-8">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <h4>Trạng Tí Phiêu Lưu Ký</h4>
+                        <h5>9.8 ★</h55>
+                    </div>
+
+                    <div class="bg-body-tertiary">
+                        <div class="row">
+                            <div class="col-2">
+                                <p class="fw-medium">Thể loại
+                                </p>
+                            </div>
+                            <div class="col-10">
+                                <p>Phiêu lưu, Viễn tưởng, Gia đình</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-2">
+                                <p class="fw-medium">Năm sản xuất
+                                </p>
+                            </div>
+                            <div class="col-10">
+                                <p>2023</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-2">
+                                <p class="fw-medium">Quốc gia
+                                </p>
+                            </div>
+                            <div class="col-10">
+                                <p>Phần Lan</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-2">
+                                <p class="fw-medium">Đạo diễn
+                                </p>
+                            </div>
+                            <div class="col-10">
+                                <p>Huỳnh Hữu Khang</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-2">
+                                <p class="fw-medium">Diễn viên
+                                </p>
+                            </div>
+                            <div class="col-10">
+                                <p>Xuân Nghị, Oanh Kiều, Mona Bảo Tiên, Trần Đức Anh, Vương Hoàng Long, Trung Dân, Phi Phung, Hoàng Phi, Hiếu Hiền</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-2">
+                                <p class="fw-medium">Nội dung phim
+                                </p>
+                            </div>
+                            <div class="col-10">
+                                <p>Trạng Tí Phiêu Lưu Kí là chuyến phiêu lưu vượt ngoài trí tưởng tượng của bộ tứ Tí - Sửu - Dần - Mẹo khi phải cùng nhau vượt qua rất nhiều thử thách để <a href="#">Xem thêm</a></p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <button class="btn btn-danger mt-3 px-5">▶　Xem phim</button>
+
+                </div>
+
+
+            </div>
+        </div>
+    </section>
+
+
+    <section class="py-4 bg-body-tertiary">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <h4>Phim đề xuất</h4>
+            </div>
+            <div class="row">
+                <div class="col-2">
+                    <div class="movie-item">
+                        <div class="movie-poster rounded overflow-hidden">
+                            <img src="https://cinema.momocdn.net/img/60738efc-4247-4b0f-8f93-230f1048463c-67607266484586062.jpg"
+                                alt="Lật Mặt 6: Tấm Vé Định Mệnht">
+                        </div>
+                        <div class="movie-info">
+                            <p class="mt-3 mb-0">Lật Mặt 6: Tấm Vé Định Mệnh</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-2">
+                    <div class="movie-item">
+                        <div class="movie-poster rounded overflow-hidden">
+                            <img src="https://homepage.momocdn.net/cinema/momo-cdn-api-220615142916-637909001563293062.jpg"
+                                alt="NOPE: KHÔNG">
+                        </div>
+                        <div class="movie-info">
+                            <p class="mt-3 mb-0">NOPE: KHÔNG</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-2">
+                    <div class="movie-item">
+                        <div class="movie-poster rounded overflow-hidden">
+                            <img src="https://cinema.momocdn.net/img/89450286334689294-vW016VDPIzzEgDzrC19xJ7pAoqg.jpg"
+                                alt="Âm Lượng Hủy Diệt">
+                        </div>
+                        <div class="movie-info">
+                            <p class="mt-3 mb-0">Âm Lượng Hủy Diệt</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-2">
+                    <div class="movie-item">
+                        <div class="movie-poster rounded overflow-hidden">
+                            <img src="https://cinema.momocdn.net/img/80376219538772557-1-5004.png"
+                                alt="Vô Diện Sát Nhân">
+                        </div>
+                        <div class="movie-info">
+                            <p class="mt-3 mb-0">Vô Diện Sát Nhân</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-2">
+                    <div class="movie-item">
+                        <div class="movie-poster rounded overflow-hidden">
+                            <img src="https://cinema.momocdn.net/img/4186614890981939-54IXMMEQKlkPXHqPExWy98UBmtE.jpg"
+                                alt="Vong Hồn Rước Lễ">
+                        </div>
+                        <div class="movie-info">
+                            <p class="mt-3 mb-0">Vong Hồn Rước Lễ</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-2">
+                    <div class="movie-item">
+                        <div class="movie-poster rounded overflow-hidden">
+                            <img src="https://homepage.momocdn.net/cinema/momo-upload-api-230707152047-638243400474715682.jpg"
+                                alt="SUGA: Road to D-DAY">
+                        </div>
+                        <div class="movie-info">
+                            <p class="mt-3 mb-0">SUGA: Road to D-DAY</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-4">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <h4>Bình luận</h4>
+            </div>
+            <p> Vui lòng <a href="#">đăng nhập</a> để viết bình luận</p>
+
+            <div class="review-list">
+                <div class="review-item mt-4 mb-5">
+                    <div class="review-author d-flex justify-content-between">
+                        <div class="d-flex ">
+                            <div class="review-author-avatar">
+                                <img src="https://placehold.co/200x200?text=D"
+                                    alt="avatar">
+                            </div>
+                            <div class="ms-3">
+                                <p class="fw-semibold">Lê Hải Dũng</p>
+                                <p>★ 10/10 Xuất sắc</p>
+                            </div>
+                        </div>
+                        <div>
+                            <p>20/02/2022</p>
+                        </div>
+                    </div>
+                    <div class="review-content mt-3">
+                        <p>nhạc như nc ốc</p>
+                    </div>
+                </div>
+                <div class="review-item  mt-5 mb-5">
+                    <div class="review-author d-flex justify-content-between ">
+                        <div class="d-flex ">
+                            <div class="review-author-avatar">
+                                <img src="https://placehold.co/200x200?text=H"
+                                    alt="avatar">
+                            </div>
+                            <div class="ms-3">
+                                <p class="fw-semibold">Hien Master</p>
+                                <p>★ 8/10 Rất tốt</p>
+                            </div>
+                        </div>
+                        <div>
+                            <p>19/02/2022</p>
+                        </div>
+                    </div>
+                    <div class="review-content mt-3">
+                        <p>phim hay</p>
+                    </div>
+                </div>
+                <div class="review-item mt-5 mb-5">
+                    <div class="review-author d-flex justify-content-between">
+                        <div class="d-flex ">
+                            <div class="review-author-avatar">
+                                <img src="https://placehold.co/200x200?text=H"
+                                    alt="avatar">
+                            </div>
+                            <div class="ms-3">
+                                <p class="fw-semibold">Võ Văn Hưng</p>
+                                <p>★ 10/10 Xuất sắc</p>
+                            </div>
+                        </div>
+                        <div>
+                            <p>14/02/2022</p>
+                        </div>
+                    </div>
+                    <div class="review-content mt-3">
+                        <p>chán k tả nổi, xem buồn ngủ chớt</p>
+                    </div>
+                </div>
+                <div class="review-item mmt-5 mb-5">
+                    <div class="review-author d-flex justify-content-between">
+                        <div class="d-flex ">
+                            <div class="review-author-avatar">
+                                <img src="https://placehold.co/200x200?text=V"
+                                    alt="avatar">
+                            </div>
+                            <div class="ms-3">
+                                <p class="fw-semibold">Phan Thị Vinh</p>
+                                <p>★ 10/10 Xuất sắc</p>
+                            </div>
+                        </div>
+                        <div>
+                            <p>14/02/2022</p>
+                        </div>
+                    </div>
+                    <div class="review-content mt-3">
+                        <p>hay, cảnh đẹp, diễn viên nhí quá dễ thương, xuất sắc</p>
+                    </div>
+                </div>
+                <div class="review-item mt-5 mb-5">
+                    <div class="review-author d-flex justify-content-between">
+                        <div class="d-flex ">
+                            <div class="review-author-avatar">
+                                <img src="https://placehold.co/200x200?text=T"
+                                    alt="avatar">
+                            </div>
+                            <div class="ms-3">
+                                <p class="fw-semibold">Tô Hùng Thiên</p>
+                                <p>★ 10/10 Xuất sắc</p>
+                            </div>
+                        </div>
+                        <div>
+                            <p>08/02/2022</p>
+                        </div>
+                    </div>
+                    <div class="review-content mt-3">
+                        <p>Đối với tôi đây là một bộ phim tuyệt vời và thật ý nghĩa dành cho các cháu không chỉ trong dịp tết này thôi đâu, tôi hy vọng Việt Nam mình sẽ có những bộ phim chất lượng như vậy dành cho trẻ em, đối với tôi đây là một bộ phim rất đẹp, các em nhỏ diễn xuất tự...<a>Xem thêm</a></p>
+                    </div>
+                </div>
+            </div>
+            <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </section>
+
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script> -->
+    <script src="./plugins/bootstrap/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
