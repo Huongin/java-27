@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Phim Chiếu Rạp</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<header>
+    <nav class="navbar navbar-expand-lg bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="https://movie.techmaster.vn/assets/logo-C2IIl7EL.png" alt="logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+                    aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-between" id="navbarNavAltMarkup">
+                <div>
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link text-white" th:href="@{/}">Trang chủ</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" th:href="@{/phim-bo}">Phim bộ</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active text-warning" th:href="@{/phim-chieu-rap}">Phim chiếu rạp</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" th:href="@{/phim-le}">Phim lẻ</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Quốc gia
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Ireland</a></li>
+                                <li><a class="dropdown-item" href="#">Brazil</a></li>
+                                <li><a class="dropdown-item" href="#">Việt Nam</a></li>
+                                <li><a class="dropdown-item" href="#">Nga</a></li>
+                                <li><a class="dropdown-item" href="#">Mexico</a></li>
+                                <li><a class="dropdown-item" href="#">Đài Loan</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Thể loại
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Viễn tây</a></li>
+                                <li><a class="dropdown-item" href="#">Tội phạm</a></li>
+                                <li><a class="dropdown-item" href="#">Trinh thám</a></li>
+                                <li><a class="dropdown-item" href="#">Thể thao</a></li>
+                                <li><a class="dropdown-item" href="#">Giật gân</a></li>
+                                <li><a class="dropdown-item" href="#">Kinh dị</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="#">Mua phim</a>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <a class="nav-link text-white" href="#">Đăng nhập</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<section class="py-4 bg-body-tertiary">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+            <h4>Phim Chiếu Rạp</h4>
+        </div>
+        <div class="row row-gap-3">
+            <div class="col-2" th:each="movie : ${moviePage}">
+                <a th:href="'/phim/' + ${movie.id} + '/' + ${movie.slug}">
+                    <div class="movie-item">
+                        <div class="movie-poster rounded overflow-hidden">
+                            <img th:src="${movie.thumbnail}"
+                                 th:alt="${movie.name}">
+                        </div>
+                        <div class="movie-info">
+                            <p class="mt-3 mb-0" th:text="${movie.name}">Đầu gấu đụng đầu đất</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <nav class="mt-4">
+            <ul class="pagination justify-content-center">
+                <li class="page-item disabled" th:classappend="${currentPage > 1} ? '' : 'disabled'">
+                    <a class="page-link" th:href="'?page=' + ${currentPage - 1}">Previous</a>
+                </li>
+                <li class="page-item" th:each="i : ${#numbers.sequence(1, moviePage.totalPages)}"
+                    th:classappend="${i == currentPage} ? 'active'">
+                    <a class="page-link" th:href="'?page=' + ${i}" th:text="${i}"></a>
+                </li>
+
+                <li class="page-item" th:classappend="${currentPage < moviePage.totalPages} ? '' : 'disabled'">
+                    <a class="page-link" th:href="'?page=' + ${currentPage + 1}">Next</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</section>
+
+<footer>
+    <section class="bg-dark text-white py-4">
+        <div class="container">
+            <div class="row ">
+                <!-- Logo và giới thiệu -->
+                <div class="col-md-4 d-flex flex-column align-items-center mt-md-3 px-md-5 ">
+                    <a class="navbar-brand" href="#">
+                        <img src="https://movie.techmaster.vn/assets/logo-C2IIl7EL.png" alt="logo" class="img-fluid mb-2"
+                             style="max-width: 150px;">
+                    </a>
+                    <p class="text-secondary small mx-auto text-center mt-3">
+                        Motchill - Xem phim Online Vietsub chất lượng cao miễn phí, nhiều thể loại
+                        phim phong phú, đặc sắc, giao diện trực quan, thuận tiện, tốc độ tải nhanh, thường xuyên cập nhật các bộ
+                        phim mới.
+                    </p>
+                </div>
+                <div class="col-md-2">
+                    <h5 class="fw-bold small mt-3">DANH MỤC</h5>
+                    <ul class="list-unstyled small d-flex flex-column gap-3 mt-3">
+                        <li class="list-item ">Phim chiếu rạp</li>
+                        <li class="list-item ">Tin tức</li>
+                        <li class="list-item">Phim bộ</li>
+                        <li class="list-item">Phim lẻ</li>
+                        <li class="list-item">TV Show</li>
+                    </ul>
+                </div>
+                <div class="col-md-2">
+                    <h5 class="fw-bold small mt-3">THỂ LOẠI</h5>
+                    <ul class="list-unstyled small d-flex flex-column gap-3 mt-3">
+                        <li class="list-item">Phim cổ trang</li>
+                        <li class="list-item">Phim đam mỹ</li>
+                        <li class="list-item">Phim bách hợp</li>
+                        <li class="list-item">Phim viễn tưởng</li>
+                        <li class="list-item">Phim hoạt hình</li>
+                    </ul>
+                </div>
+                <div class="col-md-2">
+                    <h5 class="fw-bold small mt-3">ĐIỀU KHOẢN</h5>
+                    <ul class="list-unstyled small d-flex flex-column gap-3 mt-3 ">
+                        <li class="list-item">DMCA</li>
+                        <li class="list-item">Liên hệ</li>
+                        <li class="list-item">Privacy</li>
+                        <li class="list-item">Terms of Service</li>
+                    </ul>
+                </div>
+                <div class="col-md-2  mt-3">
+                    <h5 class="fw-bold small">SOCIAL</h5>
+                    <div class="d-flex gap-3">
+                        <img src="https://movie.techmaster.vn/assets/facebook-BcNyBvTH.png" alt="Facebook" class="logo-social">
+                        <img src="https://movie.techmaster.vn/assets/twitter-SwWbRagI.png" alt="Twitter" class="logo-social">
+                        <img src="https://movie.techmaster.vn/assets/youtube-zurOuWpU.png" alt="YouTube" class="logo-social">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</footer>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+
+<script th:inline="javascript">
+    let moviePage = [[${moviePage}]];
+    console.log(moviePage)
+
+    let currentPage = [[${currentPage}]];
+    console.log(currentPage)
+</script>
+</body>
+</html>
