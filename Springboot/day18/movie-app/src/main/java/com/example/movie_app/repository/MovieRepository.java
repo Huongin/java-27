@@ -8,12 +8,12 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
-import org.springframework.stereotype.Repository;
+
 
 import java.util.List;
+import java.util.Optional;
 
-@Repository
-public interface MovieRepository extends JpaRepository <Movie, Long> {
+public interface MovieRepository extends JpaRepository <Movie, Integer> {
     Movie findByName(String name);
 
     List<Movie> findByNameContaining(String name);
@@ -61,5 +61,7 @@ public interface MovieRepository extends JpaRepository <Movie, Long> {
     Movie findByIdAndSlugAndStatus(Integer id, String slug, boolean status);
 
     @Query(value = "select * FROM movies WHERE type = ?1 AND status = ?2 ORDER BY rating desc limit ?3", nativeQuery = true)
-    List<Movie> findRecommendedMovies(MovieType type, boolean status, int limit);
+    List<Movie> findRecommendedMovies(String type, boolean status, int limit);
+
+    Optional<Movie> findByIdAndStatusTrue(Integer movieId);
 }

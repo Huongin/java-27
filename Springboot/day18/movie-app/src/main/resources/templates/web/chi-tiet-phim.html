@@ -1,0 +1,435 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Chi Tiết Phim</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+          integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+    <link rel="icon" href="data:,">
+</head>
+
+<body>
+<th:block th:replace="~{web/fragments/header::header}"></th:block>
+
+<section class="py-4">
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a th:href="@{/}">Trang chủ</a>
+                </li>
+                <li class="breadcrumb-item">
+                  <th:block th:switch="${movieTypeDisplay}">
+                    <a th:href="@{/phim-bo}" th:case="'Phim Bộ'">Phim bộ</a>
+                    <a th:href="@{/phim-le}" th:case="'Phim Lẻ'">Phim lẻ</a>
+                    <a th:href="@{/phim-chieu-rap}" th:case="'Phim Chiếu Rạp'">Phim chiếu rạp</a>
+                  </th:block>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page" th:text="${movie.name}">Movie Name</li>
+            </ol>
+        </nav>
+
+        <div class="row">
+            <div class="col-4">
+                <div class="detail-movie-poster rounded overflow-hidden">
+                    <img th:src="${movie.thumbnail}"
+                         th:alt="${movie.name}">
+                    <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#trailerModal">
+                        ▶
+                    </button>
+                </div>
+            </div>
+            <div class="col-8">
+                <div class="d-flex justify-content-between gap-3 mb-2 ">
+                    <h4 th:text="${movie.name}">Movie Name</h4>
+                    <h5><th:block th:text="${movie.rating}">rating</th:block> ⭐️</h5>
+                </div>
+
+                <div class="bg-body-tertiary">
+                    <div class="row">
+                        <div class="col-2">
+                            <p class="fw-medium">Thể loại
+                            </p>
+                        </div>
+                        <div class="col-10">
+                            <p>
+                                <th:block th:each="genre : ${movie.genres}"
+                                          th:text="${genre.name}">Genre</th:block>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-2">
+                            <p class="fw-medium">Năm sản xuất
+                            </p>
+                        </div>
+                        <div class="col-10">
+                            <p th:text="${movie.releaseYear}">Year</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-2">
+                            <p class="fw-medium">Quốc gia</p>
+                        </div>
+                        <div class="col-10">
+                            <p th:text="${movie.country.name}">Country</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-2">
+                            <p class="fw-medium">Đạo diễn</p>
+                        </div>
+                        <div class="col-10">
+                            <p>
+                                <th:block th:each="director : ${movie.directors}"
+                                          th:text="${director.name}">director</th:block>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-2">
+                            <p class="fw-medium">Diễn viên</p>
+                        </div>
+                        <div class="col-10">
+                            <p>
+                                <th:block th:each="actor : ${movie.actors}"
+                                          th:text="${actor.name}">Actors</th:block>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-2">
+                            <p class="fw-medium">Nội dung phim</p>
+                        </div>
+                        <div class="col-10">
+                            <p th:text="${movie.description}">Movie Description</p>
+                        </div>
+                    </div>
+                </div>
+
+                <th:block th:if="${!episodes.isEmpty()}" th:with="episode=${episodes.get(0)}">
+                    <a class="btn btn-danger mt-3 px-5"
+                       th:href="'/xem-phim/' + ${movie.id} + '/' + ${movie.slug} + '?tap=' + ${movie.type.toString().equals('PHIM_BO') ? episode.displayOrder : 'full'}"
+                    >Xem phim</a>
+                </th:block>
+                <button class="btn btn-dark mt-3 px-5" id="btn-addFavorite"
+                        th:attr="data-movie-id=${movie.id}">Thêm vào danh sách yêu thích</button>
+            </div>
+        </div>
+
+
+        <div class="row" th:if="${movie.type.toString().equals('PHIM_BO')}">
+            <h4>Tập phim</h4>
+            <div>
+                <a th:each="episode : ${episodes}"
+                   th:href="'/xem-phim/' + ${movie.id} + '/' + ${movie.slug} + '?tap=' + ${episode.displayOrder}"
+                   class="btn btn-dark me-2"
+                   th:text="${episode.name}"
+                >Tập 1</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="modal fade" id="trailerModal" tabindex="-1" aria-labelledby="trailerModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl"> <!-- modal-lg hoặc modal-xl -->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="trailerModalLabel">Trailer</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="ratio ratio-16x9">
+                        <iframe id="trailerVideo" src="https://www.youtube.com/embed/NOhDyUmT9z0?rel=0"
+                                title="YouTube video" allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="py-4 bg-body-tertiary">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+            <h4>Phim đề xuất</h4>
+        </div>
+        <div class="row">
+            <div class="col-2" th:each="movie : ${recommendedMovies}">
+                <a th:href="'/phim/' + ${movie.id} + '/' + ${movie.slug}">
+                    <div class="movie-item">
+                        <div class="movie-poster rounded overflow-hidden">
+                            <img th:src="${movie.thumbnail}"
+                                 th:alt="${movie.name}">
+                        </div>
+                        <div class="movie-info">
+                            <p class="mt-3 mb-0" th:text="${movie.name}">Tên phim</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <p th:if="${#lists.isEmpty(recommendedMovies)}">Không có phim đề xuất.</p>
+    </div>
+</section>
+
+<section class="py-4">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+            <h4>Bình luận</h4>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-review">
+                Viết bình luận
+            </button>
+        </div>
+        <p> Vui lòng <a href="#">đăng nhập</a> để viết bình luận</p>
+
+        <div class="review-list">
+            <div class="review-item">
+                <div class="review-author d-flex justify-content-between">
+                    <div class="d-flex ">
+                        <div class="review-author-avatar">
+                            <img src="https://placehold.co/200x200?text=D"
+                                 alt="avatar">
+                        </div>
+                        <div class="ms-3">
+                            <p class="fw-semibold">Lê Hải Dũng</p>
+                            <p><span class="text-warning">★</span>10/10 Xuất sắc</p>
+                        </div>
+                    </div>
+                    <div>
+                        <p>20/02/2022</p>
+                    </div>
+                </div>
+                <div class="review-content mt-3">
+                    <p>nhạc như nc ốc</p>
+                </div>
+            </div>
+            <div class="review-item">
+                <div class="review-author d-flex justify-content-between ">
+                    <div class="d-flex ">
+                        <div class="review-author-avatar">
+                            <img src="https://placehold.co/200x200?text=H"
+                                 alt="avatar">
+                        </div>
+                        <div class="ms-3">
+                            <p class="fw-semibold">Hien Master</p>
+                            <p><span class="text-warning">★</span>8/10 Rất tốt</p>
+                        </div>
+                    </div>
+                    <div>
+                        <p>19/02/2022</p>
+                    </div>
+                </div>
+                <div class="review-content mt-3">
+                    <p>phim hay</p>
+                </div>
+            </div>
+            <div class="review-item">
+                <div class="review-author d-flex justify-content-between">
+                    <div class="d-flex ">
+                        <div class="review-author-avatar">
+                            <img src="https://placehold.co/200x200?text=H"
+                                 alt="avatar">
+                        </div>
+                        <div class="ms-3">
+                            <p class="fw-semibold">Võ Văn Hưng</p>
+                            <p><span class="text-warning">★</span>10/10 Xuất sắc</p>
+                        </div>
+                    </div>
+                    <div>
+                        <p>14/02/2022</p>
+                    </div>
+                </div>
+                <div class="review-content mt-3">
+                    <p>chán k tả nổi, xem buồn ngủ chớt</p>
+                </div>
+            </div>
+            <div class="review-item">
+                <div class="review-author d-flex justify-content-between">
+                    <div class="d-flex ">
+                        <div class="review-author-avatar">
+                            <img src="https://placehold.co/200x200?text=V"
+                                 alt="avatar">
+                        </div>
+                        <div class="ms-3">
+                            <p class="fw-semibold">Phan Thị Vinh</p>
+                            <p><span class="text-warning">★</span>10/10 Xuất sắc</p>
+                        </div>
+                    </div>
+                    <div>
+                        <p>14/02/2022</p>
+                    </div>
+                </div>
+                <div class="review-content mt-3">
+                    <p>hay, cảnh đẹp, diễn viên nhí quá dễ thương, xuất sắc</p>
+                </div>
+            </div>
+            <div class="review-item">
+                <div class="review-author d-flex justify-content-between">
+                    <div class="d-flex ">
+                        <div class="review-author-avatar">
+                            <img src="https://placehold.co/200x200?text=T"
+                                 alt="avatar">
+                        </div>
+                        <div class="ms-3">
+                            <p class="fw-semibold">Tô Hùng Thiên</p>
+                            <p><span class="text-warning">★</span>10/10 Xuất sắc</p>
+                        </div>
+                    </div>
+                    <div>
+                        <p>08/02/2022</p>
+                    </div>
+                </div>
+                <div class="review-content mt-3">
+                    <p>Đối với tôi đây là một bộ phim tuyệt vời và thật ý nghĩa dành cho các cháu không chỉ trong dịp tết này thôi đâu, tôi hy vọng Việt Nam mình sẽ có những bộ phim chất lượng như vậy dành cho trẻ em, đối với tôi đây là một bộ phim rất đẹp, các em nhỏ diễn xuất tự...<a>Xem thêm</a></p>
+                </div>
+            </div>
+        </div>
+        <nav class="mt-4">
+            <ul class="pagination justify-content-center">
+                <li class="page-item disabled">
+                    <a class="page-link">Previous</a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item active"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#">Next</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</section>
+
+<footer>
+    <section class="bg-dark text-white py-4">
+        <div class="container">
+            <div class="row ">
+                <!-- Logo và giới thiệu -->
+                <div class="col-md-4 d-flex flex-column align-items-center mt-md-3 px-md-5 ">
+                    <a class="navbar-brand" href="#">
+                        <img src="https://movie.techmaster.vn/assets/logo-C2IIl7EL.png" alt="logo" class="img-fluid mb-2"
+                             style="max-width: 150px;">
+                    </a>
+                    <p class="text-secondary small mx-auto text-center mt-3">
+                        Motchill - Xem phim Online Vietsub chất lượng cao miễn phí, nhiều thể loại
+                        phim phong phú, đặc sắc, giao diện trực quan, thuận tiện, tốc độ tải nhanh, thường xuyên cập nhật các bộ
+                        phim mới.
+                    </p>
+                </div>
+                <div class="col-md-2">
+                    <h5 class="fw-bold small mt-3">DANH MỤC</h5>
+                    <ul class="list-unstyled small d-flex flex-column gap-3 mt-3">
+                        <li class="list-item ">Phim chiếu rạp</li>
+                        <li class="list-item ">Tin tức</li>
+                        <li class="list-item">Phim bộ</li>
+                        <li class="list-item">Phim lẻ</li>
+                        <li class="list-item">TV Show</li>
+                    </ul>
+                </div>
+                <div class="col-md-2">
+                    <h5 class="fw-bold small mt-3">THỂ LOẠI</h5>
+                    <ul class="list-unstyled small d-flex flex-column gap-3 mt-3">
+                        <li class="list-item">Phim cổ trang</li>
+                        <li class="list-item">Phim đam mỹ</li>
+                        <li class="list-item">Phim bách hợp</li>
+                        <li class="list-item">Phim viễn tưởng</li>
+                        <li class="list-item">Phim hoạt hình</li>
+                    </ul>
+                </div>
+                <div class="col-md-2">
+                    <h5 class="fw-bold small mt-3">ĐIỀU KHOẢN</h5>
+                    <ul class="list-unstyled small d-flex flex-column gap-3 mt-3 ">
+                        <li class="list-item">DMCA</li>
+                        <li class="list-item">Liên hệ</li>
+                        <li class="list-item">Privacy</li>
+                        <li class="list-item">Terms of Service</li>
+                    </ul>
+                </div>
+                <div class="col-md-2  mt-3">
+                    <h5 class="fw-bold small">SOCIAL</h5>
+                    <div class="d-flex gap-3">
+                        <img src="https://movie.techmaster.vn/assets/facebook-BcNyBvTH.png" alt="Facebook" class="logo-social">
+                        <img src="https://movie.techmaster.vn/assets/twitter-SwWbRagI.png" alt="Twitter" class="logo-social">
+                        <img src="https://movie.techmaster.vn/assets/youtube-zurOuWpU.png" alt="YouTube" class="logo-social">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</footer>
+
+<!-- Modal -->
+<div class="modal fade" id="modal-review" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Tạo bình luận</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="rating">
+                    <span class="star" data-rating="1">
+                       <i class="fa-solid fa-star"></i>
+                    </span>
+                    <span class="star" data-rating="2">
+                       <i class="fa-solid fa-star"></i>
+                    </span>
+                    <span class="star" data-rating="3">
+                       <i class="fa-solid fa-star"></i>
+                    </span>
+                    <span class="star" data-rating="4">
+                       <i class="fa-solid fa-star"></i>
+                    </span>
+                    <span class="star" data-rating="5">
+                       <i class="fa-solid fa-star"></i>
+                    </span>
+                    <span class="star" data-rating="6">
+                       <i class="fa-solid fa-star"></i>
+                    </span>
+                    <span class="star" data-rating="7">
+                       <i class="fa-solid fa-star"></i>
+                    </span>
+                    <span class="star" data-rating="8">
+                       <i class="fa-solid fa-star"></i>
+                    </span>
+                    <span class="star" data-rating="9">
+                       <i class="fa-solid fa-star"></i>
+                    </span>
+                    <span class="star" data-rating="10">
+                       <i class="fa-solid fa-star"></i>
+                    </span>
+                </div>
+                <div id="rating-value"></div>
+
+                <form id="review-form">
+                    <div class="mb-3">
+                        <textarea class="form-control" id="review-content" rows="3"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Hoàn tất</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script th:inline="javascript">
+    let movie = [[${movie}]];
+</script>
+<script th:src="@{/js/movie-detail.js}"></script>
+</body>
+
+</html>

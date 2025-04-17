@@ -1,9 +1,16 @@
 package com.example.movie_app.entity;
 
 import jakarta.persistence.*;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+@ToString
 @Entity
 @Table(name = "episodes")
 public class Episode {
@@ -11,19 +18,17 @@ public class Episode {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(nullable = false, unique = true)
     private String name;
-
-    @Column(nullable = false)
-    private Integer duration; // seconds
-
+    private Integer duration;
     private Integer displayOrder;
-    private String status;
-
-    @Column(nullable = false)
+    private Boolean status;
     private String videoUrl;
 
     private LocalDateTime publishedAt;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
+
+    @ManyToOne
+    @JoinColumn(name = "movie_id")
+    private Movie movie;
 }

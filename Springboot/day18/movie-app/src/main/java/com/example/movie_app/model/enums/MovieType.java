@@ -5,15 +5,13 @@ public enum MovieType {
     PHIM_LE("Phim Lẻ"),
     PHIM_CHIEU_RAP("Phim Chiếu Rạp");
 
-    private final String displayName;
+   public String value;
 
-
-    MovieType(String displayName) {
-        this.displayName = displayName;
+    public String getValue() {
+        return value;
     }
 
-
-    public String getDisplayName() {
-        return displayName;
+    private MovieType(String value) {
+        this.value = value;
     }
 }

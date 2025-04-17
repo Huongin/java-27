@@ -34,6 +34,7 @@ img {
     object-fit: cover;
 }
 
+
 a {
     text-decoration: none;
 }
@@ -52,3 +53,23 @@ a {
 .logo-social{
     width: 30px;
 }
+
+.rating {
+    font-size: 24px;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.star {
+    display: inline-block;
+}
+
+.star:hover,
+.star.active {
+    color: #EDBB0E;
+}
+#pagination-container {
+    border: 1px solid red;
+    min-height: 40px;
+}
+
